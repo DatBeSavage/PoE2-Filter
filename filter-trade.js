@@ -1,5 +1,9 @@
-(function() {
-    if (window.filterToolActive) return;
+javascript:(function() {
+    // Check if the tool is already active
+    if (window.filterToolActive) {
+        console.log("Stash Filter is already active.");
+        return;
+    }
     window.filterToolActive = true;
 
     const synonyms = {
