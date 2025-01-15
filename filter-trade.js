@@ -1,4 +1,3 @@
-
 if (window.filterToolActive) return;
 window.filterToolActive = true;
 
@@ -8,6 +7,8 @@ const synonyms = {
     crit: "critical",
     atk: "attack",
     def: "defense",
+    es:  "energy shield",
+    lvl: "level"
 };
 
 function normalizeText(text) {
