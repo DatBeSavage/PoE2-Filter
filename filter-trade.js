@@ -47,8 +47,8 @@ javascript:(function() {
                 style="height: 40px; filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.7)); border-radius: 4px;" 
                 onerror="this.style.display='none';">
             <a href="https://buymeacoffee.com/datsavage" target="_blank" 
-                style="text-decoration: none; color: #c9aa71; font-size: 12px; font-weight: bold; background: #3d3d3d; padding: 6px 10px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); transition: all 0.2s;">
-                Buy Me a Coffee
+                style="text-decoration: none; color: #c9aa71; font-size: 10px; font-weight: bold; background: #3d3d3d; padding: 4px 8px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); transition: all 0.2s; position: absolute; top: 5px; right: 5px;">
+                Coffee?
             </a>
             <button id="minimize-btn" style="background: transparent; border: none; color: #c9aa71; font-size: 14px; cursor: pointer;">-</button>
         </div>
@@ -100,7 +100,7 @@ javascript:(function() {
             container.querySelector("#status").style.display = "block";
             minimizeButton.textContent = "-";
         } else {
-            container.style.height = "40px";
+            container.style.height = "50px"; // Set a fixed height for minimized state
             container.querySelector("input").style.display = "none";
             container.querySelector("button").style.display = "none";
             container.querySelector("#progress-bar").style.display = "none";
