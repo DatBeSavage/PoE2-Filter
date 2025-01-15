@@ -1,5 +1,4 @@
-javascript:(function() {
-    // Check if the tool is already active
+javascript:(function() { 
     if (window.filterToolActive) {
         console.log("Stash Filter is already active.");
         return;
@@ -12,7 +11,7 @@ javascript:(function() {
         crit: "critical",
         atk: "attack",
         def: "defense",
-        es:  "energy shield",
+        es: "energy shield",
         lvl: "level"
     };
 
@@ -40,6 +39,7 @@ javascript:(function() {
         z-index: 10000;
         font-family: Arial, sans-serif;
         width: 300px;
+        cursor: move;
     `;
     container.innerHTML = `
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
@@ -50,6 +50,7 @@ javascript:(function() {
                 style="text-decoration: none; color: #c9aa71; font-size: 12px; font-weight: bold; background: #3d3d3d; padding: 6px 10px; border-radius: 4px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); transition: all 0.2s;">
                 Buy Me a Coffee
             </a>
+            <button id="minimize-btn" style="background: transparent; border: none; color: #c9aa71; font-size: 14px; cursor: pointer;">-</button>
         </div>
         <input type="text" placeholder="Enter search term..." style="width: 100%; padding: 10px; border: 1px solid #3d3d3d; background: #0a0a0a; color: #c9aa71; font-size: 14px; border-radius: 4px; margin-bottom: 12px; outline: none; box-sizing: border-box;">
         <button style="width: 100%; padding: 10px; background: #c9aa71; color: #000; border: 1px solid #8b733f; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 13px; border-radius: 4px; transition: all 0.3s;">
@@ -63,6 +64,51 @@ javascript:(function() {
         </div>
     `;
     document.body.appendChild(container);
+
+    // Make the container draggable
+    const dragHandle = container.querySelector("div");
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    dragHandle.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        offsetX = e.clientX - container.getBoundingClientRect().left;
+        offsetY = e.clientY - container.getBoundingClientRect().top;
+        document.addEventListener("mousemove", onDrag);
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            document.removeEventListener("mousemove", onDrag);
+        });
+    });
+
+    function onDrag(e) {
+        if (isDragging) {
+            container.style.left = `${e.clientX - offsetX}px`;
+            container.style.top = `${e.clientY - offsetY}px`;
+        }
+    }
+
+    // Minimize/Restore functionality
+    const minimizeButton = container.querySelector("#minimize-btn");
+    let isMinimized = false;
+    minimizeButton.addEventListener("click", () => {
+        if (isMinimized) {
+            container.style.height = "auto";
+            container.querySelector("input").style.display = "block";
+            container.querySelector("button").style.display = "block";
+            container.querySelector("#progress-bar").style.display = "block";
+            container.querySelector("#status").style.display = "block";
+            minimizeButton.textContent = "-";
+        } else {
+            container.style.height = "40px";
+            container.querySelector("input").style.display = "none";
+            container.querySelector("button").style.display = "none";
+            container.querySelector("#progress-bar").style.display = "none";
+            container.querySelector("#status").style.display = "none";
+            minimizeButton.textContent = "+";
+        }
+        isMinimized = !isMinimized;
+    });
 
     // Grab elements
     const input = container.querySelector("input");
