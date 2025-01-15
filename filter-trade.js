@@ -1,3 +1,4 @@
+
 if (window.filterToolActive) return;
 window.filterToolActive = true;
 
